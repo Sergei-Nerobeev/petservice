@@ -1,33 +1,59 @@
-HELP.md
+# Компилированные файлы классов
+*.class
+
+# Лог-файлы
+*.log
+
+# Папка сгенерированных файлов
+/bin/
+build/
+
+# Файлы maven
 target/
-!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+/maven-wrapper.properties
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Файлы зависимостей
+dependency-reduced-pom.xml
+releases/
+resolved-dependencies/
+dependency/
 
+# Папка с данными кэша и временные файлы
+.cache/
+tmp/
+
+# Файлы конфигурации IDE
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+### Eclipse ###
+.project
+.classpath
+.settings/
 
-### VS Code ###
-.vscode/
+# Папка с библиотеками
+lib/
+
+# Файлы пакета
+*.jar
+*.war
+*.ear
+
+# Скрытые файлы операционной системы
+.DS_Store
+Thumbs.db
+
+# SonarLint
+.sonarlint/
+
+# Папки и файлы кэша SonarLint для разных IDE
+/.idea/sonarlint/
+.vscode/sonarlint/
+.sonar/
