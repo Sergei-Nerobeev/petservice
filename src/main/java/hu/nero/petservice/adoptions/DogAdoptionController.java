@@ -21,7 +21,7 @@ public class DogAdoptionController {
 
   @PostMapping("/dogs/{dogId}/adoptions")
   void adopt(
-      @PathVariable int dogId,
+      @PathVariable Integer dogId,
       @RequestBody Map<String, String> owner) {
 
     repository.findById(dogId).ifPresent(dog -> {
