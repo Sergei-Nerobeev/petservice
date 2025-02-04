@@ -1,8 +1,10 @@
 package hu.nero.petservice.adoptions;
 
+import hu.nero.petservice.DogRepository;
 import hu.nero.petservice.entity.Dog;
 import hu.nero.petservice.vet.Dogtor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +21,12 @@ import java.util.Map;
 public class DogAdoptionController {
 
   private final DogRepository repository;
-  private final Dogtor dogtor;
+  private final ApplicationEventPublisher publisher;
 
   @Autowired
-  public DogAdoptionController(DogRepository repository, Dogtor dogtor) {
+  public DogAdoptionController(DogRepository repository, ApplicationEventPublisher publisher) {
     this.repository = repository;
-    this.dogtor = dogtor;
+    this.publisher = publisher;
   }
 
   @PostMapping("/dogs/{dogId}/adoptions")
@@ -40,7 +42,8 @@ public class DogAdoptionController {
               dog.getDescription(),
               owner.get("name")
           ));
-      this.dogtor.checkup(dogId);
+
+      this.publisher.publishEvent(new Dog(dogId, dog.getName(), dog.getDescription(), dog.getOwner()));
       System.out.println("adopted [ " + newDog + "]");
     });
 
@@ -48,10 +51,4 @@ public class DogAdoptionController {
 
 }
 
-interface DogRepository extends ListCrudRepository<Dog, Integer> {
 
-}
-
-//record Dog(int id, String name, String description, String owner) {
-//
-//}
